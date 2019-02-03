@@ -8,10 +8,10 @@ Requirements Overview
 ---------------------
 
 The vision of Gamezeug is to provide an open source gaming platform with the following features:
-- Gamer management
+- User (Gamer/Admin) management
 - Game table management
-- Integration of web-based open source games
-- Chat
+- REST API for the integration of web-based open source games
+- In-Game chat
 - Statistics
 
 All requirements are currently tracked in
