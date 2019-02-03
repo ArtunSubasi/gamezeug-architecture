@@ -1,0 +1,78 @@
+---
+elements:
+  -
+    type: Person
+    name: Gamer
+    description: 'A gamer person who likes to play games'
+    tags: ""
+    position: '1040,78'
+  -
+    type: 'Software System'
+    name: Gamezeug
+    description: 'The second best open source gaming platform'
+    tags: 'System in scope'
+    position: '1015,728'
+  -
+    type: 'Software System'
+    name: GitHub
+    description: 'A hosting service for version control using Git'
+    tags: 'External system'
+    position: '1015,1278'
+relationships:
+  -
+    source: Gamer
+    description: uses
+    technology: ""
+    destination: Gamezeug
+    tags: ""
+  -
+    source: Gamezeug
+    description: 'authenticates user using'
+    technology: ""
+    destination: GitHub
+    tags: ""
+styles:
+  -
+    type: element
+    tag: 'External system'
+    width: ""
+    height: ""
+    background: '#757575'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: ""
+    metadata: ""
+    description: ""
+  -
+    type: element
+    tag: Person
+    width: ""
+    height: ""
+    background: '#08427b'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: Person
+    metadata: ""
+    description: ""
+  -
+    type: element
+    tag: 'Software System'
+    width: ""
+    height: ""
+    background: '#1168bd'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: ""
+    metadata: ""
+    description: ""
+type: 'System Context'
+scope: Gamezeug
+description: 'The system context diagram for Gamezeug.'
+size: A5_Landscape
+
