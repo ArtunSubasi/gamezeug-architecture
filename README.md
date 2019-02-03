@@ -21,7 +21,14 @@ System Scope and Context
 ========================
 
 ![Level 0 Context View](c4model/00-ContextView.svg)
+
+Glossary 
+========
+
+**Keys for the C4 Models**
+
 ![Keys](c4model/99-Keys.svg)
+
 
 **About arc42**
 
