@@ -2,7 +2,7 @@ Introduction and Goals
 ======================
 
 Welcome to the the architecture documentation of Gamezeug.
-Gamezeug is a software development playground to try out new libraries, frameworks, methods, etc
+Gamezeug is a software development playground to try out new libraries, frameworks, methods, etc.
 
 Requirements Overview
 ---------------------
@@ -15,13 +15,13 @@ The vision of Gamezeug is to provide an open source gaming platform with the fol
 - Statistics
 
 All requirements are currently tracked in
-[![Trello](https://img.shields.io/badge/Trello-public-brightgreen.svg)](https://trello.com/b/xavV1IPz/gamezeug).
+[![Trello](https://img.shields.io/badge/Trello-public-brightgreen.svg)](https://trello.com/b/xavV1IPz/gamezeug)
 
 System Scope and Context
 ========================
 
-![Level 0 Context View](c4model/00-ContextView.svg)<img src="c4model/00-ContextView.svg?sanitize=true">
-![Keys](c4model/99-Keys.svg)<img src="c4model/99-Keys.svg?sanitize=true">
+![Level 0 Context View](c4model/00-ContextView.svg)
+![Keys](c4model/99-Keys.svg)
 
 **About arc42**
 
