@@ -79,6 +79,12 @@ relationships:
     destination: 'Game Registry'
     tags: ""
   -
+    source: 'Admin UI'
+    description: 'redirects for login'
+    technology: ""
+    destination: 'Auth Server'
+    tags: ""
+  -
     source: 'Auth Server'
     description: 'authenticates users using'
     technology: ""
@@ -119,6 +125,12 @@ relationships:
     description: 'manages tables and running games'
     technology: ""
     destination: Tables
+    tags: ""
+  -
+    source: Portal
+    description: 'redirects for login'
+    technology: ""
+    destination: 'Auth Server'
     tags: ""
   -
     source: Tables
