@@ -1,0 +1,190 @@
+---
+elements:
+  -
+    type: 'Software System'
+    name: 'Game 1'
+    description: 'An open source game which is registered in Gamezeug'
+    tags: 'External system'
+    position: '1610,1930'
+  -
+    type: 'Software System'
+    name: 'Game 2'
+    description: 'An open source game which is registered in Gamezeug'
+    tags: 'External system'
+    position: '2395,1930'
+  -
+    type: Person
+    name: 'Game Admin'
+    description: 'A person who can administer games in Gamezeug'
+    tags: ""
+    position: '810,35'
+  -
+    type: Person
+    name: Gamer
+    description: 'A gamer person who likes to play games'
+    tags: ""
+    position: '2220,35'
+  -
+    type: 'Software System'
+    name: Gamezeug
+    description: 'The second best open source gaming platform'
+    tags: 'System in scope'
+    containers:
+      -
+        type: Container
+        name: 'Admin UI'
+        description: 'Provides a web UI for game registration and configuration'
+        technology: Vue.js
+        tags: 'System in scope'
+        position: '190,705'
+      -
+        type: Container
+        name: 'Auth Server'
+        description: 'Authenticates users using an internal user registry or other authentification providers'
+        technology: 'Spring Boot, Kotlin, OAuth 2.0'
+        tags: 'System in scope'
+        position: '1410,705'
+      -
+        type: Container
+        name: 'Game Registry'
+        description: 'Contains the registered games and the game configurations'
+        technology: 'Spring Boot, Kotlin'
+        tags: 'System in scope'
+        position: '190,1240'
+      -
+        type: Container
+        name: Portal
+        description: 'Provides a web UI for managing tables, starting games, chatting, etc.'
+        technology: Angular
+        tags: 'System in scope'
+        position: '2690,705'
+      -
+        type: Container
+        name: Tables
+        description: 'Backend for managing game tables and running games'
+        technology: 'Spring Boot, Kotlin'
+        tags: 'System in scope'
+        position: '2020,1240'
+  -
+    type: 'Software System'
+    name: GitHub
+    description: 'A hosting service for version control using Git'
+    tags: 'External system'
+    position: '210,1930'
+relationships:
+  -
+    source: 'Admin UI'
+    description: 'registers and configures games'
+    technology: ""
+    destination: 'Game Registry'
+    tags: ""
+  -
+    source: 'Auth Server'
+    description: 'authenticates users using'
+    technology: ""
+    destination: GitHub
+    tags: ""
+  -
+    source: 'Game Admin'
+    description: uses
+    technology: ""
+    destination: 'Admin UI'
+    tags: ""
+  -
+    source: 'Game Admin'
+    description: 'logs in using'
+    technology: ""
+    destination: 'Auth Server'
+    tags: ""
+  -
+    source: 'Game Registry'
+    description: 'checks authorization'
+    technology: ""
+    destination: 'Auth Server'
+    tags: ""
+  -
+    source: Gamer
+    description: uses
+    technology: ""
+    destination: Portal
+    tags: ""
+  -
+    source: Gamer
+    description: 'logs in using'
+    technology: ""
+    destination: 'Auth Server'
+    tags: ""
+  -
+    source: Portal
+    description: 'manages tables and running games'
+    technology: ""
+    destination: Tables
+    tags: ""
+  -
+    source: Tables
+    description: 'starts and controls'
+    technology: ""
+    destination: 'Game 1'
+    tags: ""
+  -
+    source: Tables
+    description: 'starts and controls'
+    technology: ""
+    destination: 'Game 2'
+    tags: ""
+  -
+    source: Tables
+    description: 'lists registered games'
+    technology: ""
+    destination: 'Game Registry'
+    tags: ""
+  -
+    source: Tables
+    description: 'checks authorization'
+    technology: ""
+    destination: 'Auth Server'
+    tags: ""
+styles:
+  -
+    type: element
+    tag: 'External system'
+    width: ""
+    height: ""
+    background: '#757575'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: ""
+    metadata: ""
+    description: ""
+  -
+    type: element
+    tag: Person
+    width: ""
+    height: ""
+    background: '#08427b'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: Person
+    metadata: ""
+    description: ""
+  -
+    type: element
+    tag: 'System in scope'
+    width: ""
+    height: ""
+    background: '#1168bd'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: ""
+    metadata: ""
+    description: ""
+type: Container
+scope: Gamezeug
+description: 'The system context diagram for Gamezeug.'
+size: A4_Landscape

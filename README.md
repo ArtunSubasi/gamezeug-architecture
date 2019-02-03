@@ -20,7 +20,11 @@ All requirements are currently tracked in
 System Scope and Context
 ========================
 
-![Level 0 Context View](c4model/00-ContextView.svg)
+![System Scope and Context View](c4model/00-ContextView.svg)
+
+Building Block View
+===================
+![Building Block View](c4model/01-ContainerView.svg)
 
 Glossary 
 ========
