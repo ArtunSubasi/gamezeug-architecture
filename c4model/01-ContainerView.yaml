@@ -2,28 +2,28 @@
 elements:
   -
     type: 'Software System'
-    name: 'Game 1'
+    name: Game
     description: 'An open source game which is registered in Gamezeug'
     tags: 'External system'
-    position: '1610,1930'
+    position: '2655,1140'
   -
     type: 'Software System'
     name: 'Game 2'
     description: 'An open source game which is registered in Gamezeug'
     tags: 'External system'
-    position: '2395,1930'
+    position: '2690,1190'
   -
     type: Person
     name: 'Game Admin'
     description: 'A person who can administer games in Gamezeug'
     tags: ""
-    position: '810,35'
+    position: '290,45'
   -
     type: Person
     name: Gamer
     description: 'A gamer person who likes to play games'
     tags: ""
-    position: '2220,35'
+    position: '1945,50'
   -
     type: 'Software System'
     name: Gamezeug
@@ -32,58 +32,61 @@ elements:
     containers:
       -
         type: Container
-        name: 'Admin UI'
-        description: 'Provides a web UI for game registration and configuration'
-        technology: Vue.js
+        name: Admin
+        description: 'SDS for managing game registration and configuration'
+        technology: 'Vue.js, Go, MongoDB'
         tags: 'System in scope'
-        position: '190,705'
+        position: '270,1140'
       -
         type: Container
         name: 'Auth Server'
         description: 'Authenticates users using an internal user registry or other authentification providers'
         technology: 'Spring Boot, Kotlin, OAuth 2.0'
         tags: 'System in scope'
-        position: '1410,705'
+        position: '1095,640'
       -
         type: Container
-        name: 'Game Registry'
-        description: 'Contains the registered games and the game configurations'
-        technology: 'Spring Boot, Kotlin'
+        name: Chat
+        description: 'SDS for chatting in the lobby, at the tables or in private'
+        technology: 'Angular, Python, Redis'
         tags: 'System in scope'
-        position: '190,1240'
+        position: '1925,1140'
+      -
+        type: Container
+        name: 'Message Broker'
+        description: 'Loosely couples the Gamezeug microservices and external games using events'
+        technology: RabbitMQ
+        tags: ""
+        position: '1095,1850'
       -
         type: Container
         name: Portal
-        description: 'Provides a web UI for managing tables, starting games, chatting, etc.'
+        description: 'Provides a web UI to integrate the navigation, the tables UI, the chat UI and external games.'
         technology: Angular
         tags: 'System in scope'
-        position: '2690,705'
+        position: '1930,640'
       -
         type: Container
         name: Tables
-        description: 'Backend for managing game tables and running games'
+        description: 'SDS for managing game tables and running games'
         technology: 'Spring Boot, Kotlin'
         tags: 'System in scope'
-        position: '2020,1240'
+        position: '1095,1140'
   -
     type: 'Software System'
     name: GitHub
     description: 'A hosting service for version control using Git'
     tags: 'External system'
-    position: '210,1930'
+    position: '1095,120'
 relationships:
   -
-    source: 'Admin UI'
-    description: 'registers and configures games'
+    source: Admin
+    description: 'publishes game registrations'
     technology: ""
-    destination: 'Game Registry'
+    destination: 'Message Broker'
     tags: ""
-  -
-    source: 'Admin UI'
-    description: 'redirects for login'
-    technology: ""
-    destination: 'Auth Server'
-    tags: ""
+    vertices:
+      - '495,2000'
   -
     source: 'Auth Server'
     description: 'authenticates users using'
@@ -91,20 +94,28 @@ relationships:
     destination: GitHub
     tags: ""
   -
+    source: Chat
+    description: 'subscribes to table events and external game events'
+    technology: ""
+    destination: 'Message Broker'
+    tags: ""
+  -
+    source: Game
+    description: 'publishes game events, subscribes to table events'
+    technology: ""
+    destination: 'Message Broker'
+    tags: ""
+    vertices:
+      - '2895,2005'
+  -
     source: 'Game Admin'
     description: uses
     technology: ""
-    destination: 'Admin UI'
+    destination: Admin
     tags: ""
   -
     source: 'Game Admin'
     description: 'logs in using'
-    technology: ""
-    destination: 'Auth Server'
-    tags: ""
-  -
-    source: 'Game Registry'
-    description: 'checks authorization'
     technology: ""
     destination: 'Auth Server'
     tags: ""
@@ -128,33 +139,23 @@ relationships:
     tags: ""
   -
     source: Portal
-    description: 'redirects for login'
+    description: 'publishes and broadcasts messages'
     technology: ""
-    destination: 'Auth Server'
+    destination: Chat
     tags: ""
   -
-    source: Tables
-    description: 'starts and controls'
+    source: Portal
+    description: integrates
     technology: ""
-    destination: 'Game 1'
+    destination: Game
     tags: ""
+    vertices:
+      - '2880,790'
   -
     source: Tables
-    description: 'starts and controls'
+    description: 'publishes table events, subscribes to game registrations and external game events'
     technology: ""
-    destination: 'Game 2'
-    tags: ""
-  -
-    source: Tables
-    description: 'lists registered games'
-    technology: ""
-    destination: 'Game Registry'
-    tags: ""
-  -
-    source: Tables
-    description: 'checks authorization'
-    technology: ""
-    destination: 'Auth Server'
+    destination: 'Message Broker'
     tags: ""
 styles:
   -
