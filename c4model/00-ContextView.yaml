@@ -35,7 +35,7 @@ elements:
     name: GitHub
     description: 'A hosting service for version control using Git'
     tags: 'External system'
-    position: '1060,1670'
+    position: '1010,1670'
 relationships:
   -
     source: Game
