@@ -62,14 +62,14 @@ elements:
         type: Container
         name: Portal
         description: 'Provides a web UI to integrate the navigation, the tables UI, the chat UI and external games.'
-        technology: Angular
+        technology: Vue.js
         tags: 'System in scope'
         position: '1930,640'
       -
         type: Container
         name: Tables
         description: 'SDS for managing game tables and running games'
-        technology: 'Spring Boot, Kotlin'
+        technology: 'Angular, Spring Boot, Kotlin'
         tags: 'System in scope'
         position: '1095,1140'
   -
