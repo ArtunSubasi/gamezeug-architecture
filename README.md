@@ -20,19 +20,36 @@ All requirements are currently tracked in
 System Scope and Context
 ========================
 
-![System Scope and Context View](c4model/00-ContextView.svg)
+![System Scope and Context View](c4model/00-ContextView.svg)<img src="c4model/00-ContextView.svg?sanitize=true">
+
 
 Building Block View
 ===================
-![Building Block View](c4model/01-ContainerView.svg)
+![Building Block View](c4model/01-ContainerView.svg)<img src="c4model/01-ContainerView.svg?sanitize=true">
+
+Solution Strategy
+=================
+
+This chapter introduces some design decisions using frequently asked questions.
+
+**Why are you using tons of difference technologies? Why not use a consistent technology stack?**
+
+Because we can. No, seriously... Gamezeug is there to try out new stuff and have fun by learning.
+
+**Isn't this architecture an overkill for the given requirements?**
+
+Absolutely, it is. The goal was not to come up with a simple, efficient architecture.
+If that was the case, the architecture probably wouldn't contain different programming languages, 
+databases, multiple self contained systems or even containers.
+
+This architecture was chosen to play around with self contained systems in this small scope.
 
 Glossary 
 ========
 
 **Keys for the C4 Models**
 
-![Keys](c4model/99-Keys.svg)
-
+![Keys](c4model/99-Keys.svg)<img src="c4model/99-Keys.svg?sanitize=true">
 
 **About arc42**
 
