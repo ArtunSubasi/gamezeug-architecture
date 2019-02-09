@@ -20,12 +20,12 @@ All requirements are currently tracked in
 System Scope and Context
 ========================
 
-<img src="c4model/00-ContextView.svg" width="70%">
+<img src="c4model/00-ContextView.png" width="70%">
 
 
 Building Block View
 ===================
-<img src="c4model/01-ContainerView.svg">
+<img src="c4model/01-ContainerView.png">
 
 Solution Strategy
 =================
@@ -49,7 +49,7 @@ Glossary
 
 **Keys for the C4 Models**
 
-<img src="c4model/99-Keys.svg?sanitize=true" width="70%">
+<img src="c4model/99-Keys.png" width="70%">
 
 **About arc42**
 
