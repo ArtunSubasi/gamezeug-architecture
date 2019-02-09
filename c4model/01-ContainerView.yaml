@@ -5,25 +5,19 @@ elements:
     name: Game
     description: 'An open source game which is registered in Gamezeug'
     tags: 'External system'
-    position: '2655,1140'
-  -
-    type: 'Software System'
-    name: 'Game 2'
-    description: 'An open source game which is registered in Gamezeug'
-    tags: 'External system'
-    position: '2690,1190'
+    position: '1960,145'
   -
     type: Person
     name: 'Game Admin'
     description: 'A person who can administer games in Gamezeug'
     tags: ""
-    position: '290,45'
+    position: '165,55'
   -
     type: Person
     name: Gamer
     description: 'A gamer person who likes to play games'
     tags: ""
-    position: '1945,50'
+    position: '1415,65'
   -
     type: 'Software System'
     name: Gamezeug
@@ -32,61 +26,110 @@ elements:
     containers:
       -
         type: Container
-        name: Admin
-        description: 'SCS for managing game registration and configuration'
-        technology: 'Vue.js, Go, MongoDB'
+        name: 'Admin Backend'
+        description: 'Backend for administrative tasks such as game registration and configuration'
+        technology: Go
         tags: 'System in scope'
-        position: '270,1140'
+        position: '165,1560'
+      -
+        type: Container
+        name: 'Admin Database'
+        description: 'Contains game registrations and configurations'
+        technology: MongoDB
+        tags: 'Database in scope'
+        position: '165,2050'
+      -
+        type: Container
+        name: 'Admin Frontend'
+        description: 'Web-based frontend for administrative tasks such as game registration and configuration'
+        technology: Vue.js
+        tags: 'System in scope'
+        position: '165,1080'
       -
         type: Container
         name: 'Auth Server'
         description: 'Authenticates users using an internal user registry or other authentification providers'
         technology: 'Spring Boot, Kotlin, OAuth 2.0'
         tags: 'System in scope'
-        position: '1095,640'
+        position: '785,650'
       -
         type: Container
-        name: Chat
-        description: 'SCS for chatting in the lobby, at the tables or in private'
-        technology: 'Angular, Python, Redis'
+        name: 'Chat Backend'
+        description: 'Backend for chatting in the lobby, at the tables or in private'
+        technology: Python
         tags: 'System in scope'
-        position: '1925,1140'
+        position: '1415,1560'
       -
         type: Container
-        name: 'Message Broker'
+        name: 'Chat Database'
+        description: 'Contains the chat channels and messages'
+        technology: Redis
+        tags: 'Database in scope'
+        position: '1415,2055'
+      -
+        type: Container
+        name: 'Chat Frontend'
+        description: 'Web-based frontend for chatting ion the lobby,  at the table or in private'
+        technology: Vue.js
+        tags: 'System in scope'
+        position: '1415,1105'
+      -
+        type: Container
+        name: 'Message Bus'
         description: 'Loosely couples the Gamezeug microservices and external games using events'
         technology: RabbitMQ
-        tags: ""
-        position: '1095,1850'
+        tags: 'Message bus'
+        position: '140,2570'
       -
         type: Container
         name: Portal
         description: 'Provides a web UI to integrate the navigation, the tables UI, the chat UI and external games.'
         technology: Vue.js
         tags: 'System in scope'
-        position: '1930,640'
+        position: '1415,655'
       -
         type: Container
-        name: Tables
-        description: 'SCS for managing game tables and running games'
-        technology: 'Angular, Spring Boot, Kotlin'
+        name: 'Tables Backend'
+        description: 'Backend for managing game tables and running games'
+        technology: 'Spring Boot, Kotlin'
         tags: 'System in scope'
-        position: '1095,1140'
+        position: '785,1555'
+      -
+        type: Container
+        name: 'Tables Database'
+        description: 'Contains current tables, gamers and game status'
+        technology: MySQL
+        tags: 'Database in scope'
+        position: '785,2055'
+      -
+        type: Container
+        name: 'Tables Frontend'
+        description: 'Web-based frontend for managing game tables and running games'
+        technology: Angular
+        tags: 'System in scope'
+        position: '785,1090'
   -
     type: 'Software System'
     name: GitHub
     description: 'A hosting service for version control using Git'
     tags: 'External system'
-    position: '1095,120'
+    position: '785,130'
 relationships:
   -
-    source: Admin
+    source: 'Admin Backend'
     description: 'publishes game registrations'
     technology: ""
-    destination: 'Message Broker'
+    destination: 'Message Bus'
     tags: ""
     vertices:
-      - '495,2000'
+      - '665,1700'
+      - '670,2445'
+  -
+    source: 'Admin Backend'
+    description: ""
+    technology: ""
+    destination: 'Admin Database'
+    tags: ""
   -
     source: 'Auth Server'
     description: 'authenticates users using (optional)'
@@ -94,24 +137,41 @@ relationships:
     destination: GitHub
     tags: ""
   -
-    source: Chat
+    source: 'Chat Backend'
     description: 'subscribes to table events and external game events'
     technology: ""
-    destination: 'Message Broker'
+    destination: 'Message Bus'
+    tags: ""
+    vertices:
+      - '1860,1680'
+      - '1935,1680'
+      - '2005,1685'
+      - '2005,2465'
+  -
+    source: 'Chat Backend'
+    description: ""
+    technology: ""
+    destination: 'Chat Database'
+    tags: ""
+  -
+    source: 'Chat Frontend'
+    description: ""
+    technology: ""
+    destination: 'Chat Backend'
     tags: ""
   -
     source: Game
     description: 'publishes game events, subscribes to table events'
     technology: ""
-    destination: 'Message Broker'
+    destination: 'Message Bus'
     tags: ""
     vertices:
-      - '2895,2005'
+      - '2175,2565'
   -
     source: 'Game Admin'
     description: uses
     technology: ""
-    destination: Admin
+    destination: 'Admin Backend'
     tags: ""
   -
     source: 'Game Admin'
@@ -133,15 +193,15 @@ relationships:
     tags: ""
   -
     source: Portal
-    description: 'manages tables and running games'
+    description: integrates
     technology: ""
-    destination: Tables
+    destination: 'Tables Frontend'
     tags: ""
   -
     source: Portal
-    description: 'publishes and broadcasts messages'
+    description: integrates
     technology: ""
-    destination: Chat
+    destination: 'Chat Frontend'
     tags: ""
   -
     source: Portal
@@ -150,14 +210,41 @@ relationships:
     destination: Game
     tags: ""
     vertices:
-      - '2880,790'
+      - '1960,815'
   -
-    source: Tables
+    source: 'Tables Backend'
     description: 'publishes table events, subscribes to game registrations and external game events'
     technology: ""
-    destination: 'Message Broker'
+    destination: 'Message Bus'
+    tags: ""
+    vertices:
+      - '1295,1710'
+  -
+    source: 'Tables Backend'
+    description: ""
+    technology: ""
+    destination: 'Tables Database'
+    tags: ""
+  -
+    source: 'Tables Frontend'
+    description: ""
+    technology: ""
+    destination: 'Tables Backend'
     tags: ""
 styles:
+  -
+    type: element
+    tag: 'Database in scope'
+    width: ""
+    height: ""
+    background: '#1168bd'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: Cylinder
+    metadata: ""
+    description: ""
   -
     type: element
     tag: 'External system'
@@ -169,6 +256,19 @@ styles:
     opacity: ""
     fontSize: ""
     shape: ""
+    metadata: ""
+    description: ""
+  -
+    type: element
+    tag: 'Message bus'
+    width: '2250'
+    height: ""
+    background: '#1168bd'
+    color: '#ffffff'
+    border: ""
+    opacity: ""
+    fontSize: ""
+    shape: Pipe
     metadata: ""
     description: ""
   -
@@ -200,4 +300,4 @@ styles:
 type: Container
 scope: Gamezeug
 description: 'The system context diagram for Gamezeug.'
-size: A4_Landscape
+size: A4_Portrait
