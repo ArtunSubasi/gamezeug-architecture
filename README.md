@@ -44,6 +44,13 @@ databases, multiple self contained systems or even containers.
 
 This architecture was chosen to play around with self contained systems in this small scope.
 
+**What are those cool diagrams?**
+
+It is [the C4 model for software architecture](https://c4model.com/) by [Simon Brown](https://simonbrown.je/).
+
+The Gamezeug diagrams were drawn by [Structurizr Express](https://www.structurizr.com).
+The source files for the models can be found in this repository in the directory [c4model](/c4model).
+
 Glossary 
 ========
 
