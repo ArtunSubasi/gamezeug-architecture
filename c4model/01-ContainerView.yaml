@@ -33,7 +33,7 @@ elements:
       -
         type: Container
         name: Admin
-        description: 'SDS for managing game registration and configuration'
+        description: 'SCS for managing game registration and configuration'
         technology: 'Vue.js, Go, MongoDB'
         tags: 'System in scope'
         position: '270,1140'
@@ -47,7 +47,7 @@ elements:
       -
         type: Container
         name: Chat
-        description: 'SDS for chatting in the lobby, at the tables or in private'
+        description: 'SCS for chatting in the lobby, at the tables or in private'
         technology: 'Angular, Python, Redis'
         tags: 'System in scope'
         position: '1925,1140'
@@ -68,7 +68,7 @@ elements:
       -
         type: Container
         name: Tables
-        description: 'SDS for managing game tables and running games'
+        description: 'SCS for managing game tables and running games'
         technology: 'Angular, Spring Boot, Kotlin'
         tags: 'System in scope'
         position: '1095,1140'
@@ -89,7 +89,7 @@ relationships:
       - '495,2000'
   -
     source: 'Auth Server'
-    description: 'authenticates users using'
+    description: 'authenticates users using (optional)'
     technology: ""
     destination: GitHub
     tags: ""

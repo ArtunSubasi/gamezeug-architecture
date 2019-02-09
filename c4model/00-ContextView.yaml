@@ -57,7 +57,7 @@ relationships:
     tags: ""
   -
     source: Gamezeug
-    description: 'authenticates users using'
+    description: 'authenticates users using (optional)'
     technology: ""
     destination: GitHub
     tags: ""
