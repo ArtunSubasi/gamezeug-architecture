@@ -17,15 +17,8 @@ The vision of Gamezeug is to provide an open source gaming platform with the fol
 All requirements are currently tracked in
 [![Trello](https://img.shields.io/badge/Trello-public-brightgreen.svg)](https://trello.com/b/xavV1IPz/gamezeug)
 
-System Scope and Context
-========================
-
-<img src="c4model/00-ContextView.png" width="70%">
-
-
-Building Block View
-===================
-<img src="c4model/01-ContainerView.png">
+The architecture documentation for Gamezeug has been partially moved to [Structurizr](
+https://www.structurizr.com/share/42587). Currently only the diagrams are in Structurizr.
 
 Solution Strategy
 =================
@@ -43,13 +36,6 @@ If that was the case, the architecture probably wouldn't contain different progr
 databases, multiple self contained systems or even containers.
 
 This architecture was chosen to play around with self contained systems in this small scope.
-
-**What are those cool diagrams?**
-
-It is [the C4 model for software architecture](https://c4model.com/) by [Simon Brown](https://simonbrown.je/).
-
-The Gamezeug diagrams were drawn by [Structurizr Express](https://www.structurizr.com).
-The source files for the models can be found in this repository in the directory [c4model](/c4model).
 
 Glossary 
 ========
