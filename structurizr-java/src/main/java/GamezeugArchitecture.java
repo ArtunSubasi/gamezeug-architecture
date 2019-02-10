@@ -22,8 +22,9 @@ public class GamezeugArchitecture {
         Model model = workspace.getModel();
         Persons persons = new Persons(model);
         SoftwareSystems softwareSystems = new SoftwareSystems(model);
+        Containers gamezeugContainers = new Containers(softwareSystems.gamezeug);
 
-        createRelationships(persons, softwareSystems);
+        createRelationships(persons, softwareSystems, gamezeugContainers);
         ViewSet views = createViews(workspace, softwareSystems);
         addDocumentation(workspace, softwareSystems);
         addStyling(views);
@@ -32,9 +33,15 @@ public class GamezeugArchitecture {
 
     private static void addStyling(ViewSet views) {
         Styles styles = views.getConfiguration().getStyles();
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background("#1168bd").color("#ffffff");
-        styles.addElementStyle(Tags.PERSON).background("#08427b").color("#ffffff").shape(Shape.Person);
-        styles.addElementStyle(GamezeugTags.EXTERNAL_SYSTEM).background("#757575").color("#ffffff");
+        styles.addElementStyle(Tags.PERSON).background(Color.PERSON).color(Color.FONT).shape(Shape.Person);
+        styles.addElementStyle(GamezeugTags.EXTERNAL_SYSTEM).background(Color.EXTERNAL).color(Color.FONT);
+        styles.addElementStyle(GamezeugTags.DATABASE).background(Color.INTERNAL).color(Color.FONT).shape(Shape.Cylinder);
+        styles.addElementStyle(GamezeugTags.MESSAGE_BUS).background(Color.INTERNAL).color(Color.FONT).width(2900).shape(Shape.Pipe);
+        styles.addElementStyle(GamezeugTags.SPA).background(Color.INTERNAL).color(Color.FONT).shape(Shape.WebBrowser);
+        styles.addElementStyle(GamezeugTags.BACKEND).background(Color.INTERNAL).color(Color.FONT);
+
+        styles.addElementStyle(GamezeugTags.SYSTEM_IN_SCOPE)
+                .background(Color.INTERNAL).color(Color.FONT).shape(Shape.Box).width(ElementStyle.DEFAULT_WIDTH);
     }
 
     // add some documentation (markdown, etc)
@@ -44,6 +51,11 @@ public class GamezeugArchitecture {
                 "Here is some context about the software system...\n" +
                         "\n" +
                         "![](embed:SystemContext)");
+        template.addContainersSection(softwareSystems.gamezeug, Format.Markdown,
+                "This sections shows the containers within the Gamezeug system including " +
+                        "single page apps, backend servers, databases and important infrastructure elements.\n" +
+                        "\n" +
+                        "![](embed:ContainerView)");
     }
 
     // define some views (the diagrams you would like to see)
@@ -55,14 +67,45 @@ public class GamezeugArchitecture {
         contextView.addAllSoftwareSystems();
         contextView.addAllPeople();
         contextView.setEnterpriseBoundaryVisible(false);
+
+        ContainerView containerView = views.createContainerView(softwareSystems.gamezeug,
+                "ContainerView", "Building Block View");
+        containerView.setPaperSize(PaperSize.A3_Landscape);
+        containerView.addAllContainersAndInfluencers();
         return views;
     }
 
-    private static void createRelationships(Persons persons, SoftwareSystems softwareSystems) {
+    private static void createRelationships(Persons persons, SoftwareSystems softwareSystems, Containers gamezeugContainers) {
         persons.gamer.uses(softwareSystems.gamezeug, "plays games");
         persons.gameAdmin.uses(softwareSystems.gamezeug, "administer game registrations");
         softwareSystems.gamezeug.uses(softwareSystems.gitHub, "authenticates users using (optional)");
         softwareSystems.game.uses(softwareSystems.gamezeug, "publishes game events and receives table events");
+
+        persons.gamer.uses(gamezeugContainers.portal, "plays games and chats using");
+        persons.gamer.uses(gamezeugContainers.authServer, "logs in using");
+        persons.gameAdmin.uses(gamezeugContainers.adminFrontend, "administrates games using");
+        persons.gameAdmin.uses(gamezeugContainers.authServer, "logs in using");
+
+        gamezeugContainers.authServer.uses(softwareSystems.gitHub, "authenticates users using (optional)");
+
+        gamezeugContainers.portal.uses(gamezeugContainers.tablesFrontend, "integrates");
+        gamezeugContainers.portal.uses(gamezeugContainers.chatFrontend, "integrates");
+        gamezeugContainers.portal.uses(softwareSystems.game, "integrates");
+
+        gamezeugContainers.adminFrontend.uses(gamezeugContainers.adminBackend, "uses");
+        gamezeugContainers.tablesFrontend.uses(gamezeugContainers.tablesBackend, "uses");
+        gamezeugContainers.chatFrontend.uses(gamezeugContainers.chatBackend, "uses");
+
+        gamezeugContainers.adminBackend.uses(gamezeugContainers.adminDatabase, "writes to / reads from");
+        gamezeugContainers.tablesBackend.uses(gamezeugContainers.tablesDatabase, "writes to / reads from");
+        gamezeugContainers.chatBackend.uses(gamezeugContainers.chatDatabase, "writes to / reads from");
+
+        gamezeugContainers.adminBackend.uses(gamezeugContainers.messageBus, "publishes game registrations");
+        gamezeugContainers.tablesBackend.uses(gamezeugContainers.messageBus,
+                "publishes table events, subscribes to game registrations and external game events");
+        gamezeugContainers.chatBackend.uses(gamezeugContainers.messageBus,
+                "subscribes to table events and external game events");
+        softwareSystems.game.uses(gamezeugContainers.messageBus, "publishes game events, subscribes to table events");
     }
 
     private static void uploadWorkspaceToStructurizr(Workspace workspace) throws Exception {
