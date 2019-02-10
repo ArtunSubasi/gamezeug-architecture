@@ -4,6 +4,11 @@ Introduction and Goals
 Welcome to the the architecture documentation of Gamezeug.
 Gamezeug is a software development playground to try out new libraries, frameworks, methods, etc.
 
+The architecture documentation for Gamezeug has been partially moved to [Structurizr](
+https://www.structurizr.com/share/42587).
+
+The following sections will be moved in the future.
+
 Requirements Overview
 ---------------------
 
@@ -16,9 +21,6 @@ The vision of Gamezeug is to provide an open source gaming platform with the fol
 
 All requirements are currently tracked in
 [![Trello](https://img.shields.io/badge/Trello-public-brightgreen.svg)](https://trello.com/b/xavV1IPz/gamezeug)
-
-The architecture documentation for Gamezeug has been partially moved to [Structurizr](
-https://www.structurizr.com/share/42587). Currently only the diagrams are in Structurizr.
 
 Solution Strategy
 =================
@@ -40,10 +42,6 @@ This architecture was chosen to play around with self contained systems in this 
 Glossary 
 ========
 
-**Keys for the C4 Models**
-
-<img src="c4model/99-Keys.png" width="70%">
-
 **About arc42**
 
 arc42, the Template for documentation of software and system
@@ -56,5 +54,3 @@ Template Revision: 7.0 EN (based on asciidoc), January 2017
 © We acknowledge that this document uses material from the arc 42
 architecture template, <http://www.arc42.de>. Created by Dr. Peter
 Hruschka & Dr. Gernot Starke.
-
-
