@@ -1,0 +1,8 @@
+*.iml
+.idea
+
+.gradle
+gradle/wrapper
+
+build
+structurizr-*.json
