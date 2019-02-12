@@ -81,16 +81,18 @@ public class GamezeugArchitecture {
         softwareSystems.gamezeug.uses(softwareSystems.gitHub, "authenticates users using (optional)");
         softwareSystems.game.uses(softwareSystems.gamezeug, "publishes game events and receives table events");
 
-        persons.gamer.uses(gamezeugContainers.portal, "plays games and chats using");
-        persons.gamer.uses(gamezeugContainers.authServer, "logs in using");
-        persons.gameAdmin.uses(gamezeugContainers.adminFrontend, "administrates games using");
-        persons.gameAdmin.uses(gamezeugContainers.authServer, "logs in using");
+        persons.gamer.uses(gamezeugContainers.reverseProxy, "plays games and chats using");
+        persons.gameAdmin.uses(gamezeugContainers.reverseProxy, "administrates games using");
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.portal, "reads HTML template from");
 
         gamezeugContainers.authServer.uses(softwareSystems.gitHub, "authenticates users using (optional)");
+        gamezeugContainers.authServer.uses(gamezeugContainers.userDatabase, "writes to / reads from");
 
-        gamezeugContainers.portal.uses(gamezeugContainers.tablesFrontend, "integrates");
-        gamezeugContainers.portal.uses(gamezeugContainers.chatFrontend, "integrates");
-        gamezeugContainers.portal.uses(softwareSystems.game, "integrates");
+        gamezeugContainers.portal.uses(gamezeugContainers.authServer, "includes login form");
+        gamezeugContainers.portal.uses(gamezeugContainers.adminFrontend, "includes admin fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.tablesFrontend, "includes tables fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.chatFrontend, "includes chat fragment");
+        gamezeugContainers.portal.uses(softwareSystems.game, "includes external game fragment");
 
         gamezeugContainers.adminFrontend.uses(gamezeugContainers.adminBackend, "uses");
         gamezeugContainers.tablesFrontend.uses(gamezeugContainers.tablesBackend, "uses");

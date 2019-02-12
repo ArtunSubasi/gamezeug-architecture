@@ -4,6 +4,7 @@ import com.structurizr.model.SoftwareSystem;
 
 public class Containers {
 
+    Container reverseProxy;
     Container portal;
 
     Container adminFrontend;
@@ -24,8 +25,11 @@ public class Containers {
     Container messageBus;
 
     Containers(SoftwareSystem system) {
+        reverseProxy = container(system, GamezeugTags.BACKEND, "Reverse Proxy",
+                "Reads the HTML template from the portal and composes all SPAs " +
+                        "using the Pagespeed and Server Side Include (SSI) modules", "Nginx, PageSpeed, SSI");
         portal = container(system, GamezeugTags.SPA, "Portal",
-                "Provides a web UI to integrate the tables SPA, the chat SPA and external games", "Vue.js");
+                "Serves the HTML template which integrates HTML page fragments and external games", "HTML, CSS, SSI");
 
         adminFrontend = container(system, GamezeugTags.SPA, "Admin Frontend",
                 "Single page application for administrative tasks", "Vue.js");
@@ -41,7 +45,7 @@ public class Containers {
                 "Contains the users, their roles and credentials", "PostgreSQL");
 
         tablesFrontend = container(system, GamezeugTags.SPA, "Tables Frontend",
-                "Single page application for table and game status management", "Angular, Typescript");
+                "Single page application for table and game status management", "Angular");
         tablesBackend = container(system, GamezeugTags.BACKEND, "Tables Backend",
                 "Backend for for table and game status management", "Spring Boot, Kotlin");
         tablesDatabase = container(system, GamezeugTags.DATABASE, "Tables Database",
