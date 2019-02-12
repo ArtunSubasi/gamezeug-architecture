@@ -36,7 +36,7 @@ public class Containers {
         adminBackend = container(system, GamezeugTags.BACKEND, "Admin Backend",
                 "Backend for administrative tasks", "Go");
         adminDatabase = container(system, GamezeugTags.DATABASE, "Admin Database",
-                "Contains game registrations and configurations", "MongoDB");
+                "Contains game registrations and configurations", "DynamoDB");
 
         authServer = container(system, GamezeugTags.BACKEND, "Auth Server",
                 "Authenticates and authorizes users using an interal user database or other identity providers." +

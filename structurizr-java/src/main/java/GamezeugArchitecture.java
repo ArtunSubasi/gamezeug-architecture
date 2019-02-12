@@ -23,6 +23,7 @@ public class GamezeugArchitecture {
         Persons persons = new Persons(model);
         SoftwareSystems softwareSystems = new SoftwareSystems(model);
         Containers gamezeugContainers = new Containers(softwareSystems.gamezeug);
+        new DeploymentNodes(model, gamezeugContainers);
 
         createRelationships(persons, softwareSystems, gamezeugContainers);
         ViewSet views = createViews(workspace, softwareSystems);
@@ -72,6 +73,13 @@ public class GamezeugArchitecture {
                 "ContainerView", "Building Block View");
         containerView.setPaperSize(PaperSize.A3_Landscape);
         containerView.addAllContainersAndInfluencers();
+
+        DeploymentView deploymentView = views.createDeploymentView(softwareSystems.gamezeug,
+                "DeploymentView", "Production Deployment View");
+        deploymentView.setPaperSize(PaperSize.A3_Landscape);
+        deploymentView.addAllDeploymentNodes();
+        deploymentView.setEnvironment("Production");
+
         return views;
     }
 
