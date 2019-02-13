@@ -29,7 +29,7 @@ public class Containers {
                 "Reads the HTML template from the portal and composes all SPAs " +
                         "using the Pagespeed and Server Side Include (SSI) modules", "Nginx, PageSpeed, SSI");
         portal = container(system, GamezeugTags.SPA, "Portal",
-                "Serves the HTML template which integrates HTML page fragments and external games", "HTML, CSS, SSI");
+                "Serves the HTML template which composes HTML page fragments and external games", "HTML, CSS, SSI");
 
         adminFrontend = container(system, GamezeugTags.SPA, "Admin Frontend",
                 "Single page application for administrative tasks", "Vue.js");

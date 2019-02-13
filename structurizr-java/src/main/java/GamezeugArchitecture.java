@@ -89,18 +89,27 @@ public class GamezeugArchitecture {
         softwareSystems.gamezeug.uses(softwareSystems.gitHub, "authenticates users using (optional)");
         softwareSystems.game.uses(softwareSystems.gamezeug, "publishes game events and receives table events");
 
-        persons.gamer.uses(gamezeugContainers.reverseProxy, "plays games and chats using");
-        persons.gameAdmin.uses(gamezeugContainers.reverseProxy, "administrates games using");
-        gamezeugContainers.reverseProxy.uses(gamezeugContainers.portal, "reads HTML template from");
+        persons.gamer.uses(gamezeugContainers.reverseProxy, "uses", "https");
+        persons.gameAdmin.uses(gamezeugContainers.reverseProxy, "uses", "https");
+
+        persons.gamer.uses(gamezeugContainers.portal, "plays games");
+        persons.gameAdmin.uses(gamezeugContainers.portal, "administer game registrations");
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.portal, "reads HTML template, composes fragments, optimizes the result");
 
         gamezeugContainers.authServer.uses(softwareSystems.gitHub, "authenticates users using (optional)");
         gamezeugContainers.authServer.uses(gamezeugContainers.userDatabase, "writes to / reads from");
 
-        gamezeugContainers.portal.uses(gamezeugContainers.authServer, "includes login form");
-        gamezeugContainers.portal.uses(gamezeugContainers.adminFrontend, "includes admin fragment");
-        gamezeugContainers.portal.uses(gamezeugContainers.tablesFrontend, "includes tables fragment");
-        gamezeugContainers.portal.uses(gamezeugContainers.chatFrontend, "includes chat fragment");
-        gamezeugContainers.portal.uses(softwareSystems.game, "includes external game fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.authServer, "references as fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.adminFrontend, "references as fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.tablesFrontend, "references as fragment");
+        gamezeugContainers.portal.uses(gamezeugContainers.chatFrontend, "references as fragment");
+        gamezeugContainers.portal.uses(softwareSystems.game, "references as fragment");
+
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.authServer, "includes login form");
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.adminFrontend, "includes admin fragment");
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.tablesFrontend, "includes tables fragment");
+        gamezeugContainers.reverseProxy.uses(gamezeugContainers.chatFrontend, "includes chat fragment");
+        gamezeugContainers.reverseProxy.uses(softwareSystems.game, "includes external game fragment");
 
         gamezeugContainers.adminFrontend.uses(gamezeugContainers.adminBackend, "uses");
         gamezeugContainers.tablesFrontend.uses(gamezeugContainers.tablesBackend, "uses");
